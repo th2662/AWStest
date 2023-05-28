@@ -4,7 +4,7 @@ spring:
       on-profile: dev
     import: 'aws-parameterstore:'
   datasource:
-    url: ${dev-jdbc-url}
+    url: ${jdbc-url}
     username: ${db-username}
     password: ${db-password}
   jpa:
