@@ -3,6 +3,7 @@ package com.ifutsalu.controller;
 import com.ifutsalu.domain.Match;
 import com.ifutsalu.domain.Stadium;
 import com.ifutsalu.domain.User;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -86,7 +87,6 @@ public class MatchController {
         return ResponseEntity.noContent().build();
     }
 
-
     /**
      * 매치 취소
      */
@@ -98,7 +98,6 @@ public class MatchController {
         return ResponseEntity.noContent().build();
     }
 
-
     /**
      * 매치 좋아요
      */
@@ -109,7 +108,6 @@ public class MatchController {
 
         return ResponseEntity.noContent().build();
     }
-
 
     /**
      * 매치 좋아요 취소

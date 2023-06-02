@@ -1,6 +1,7 @@
 package com.ifutsalu.dto.user;
 
 import com.ifutsalu.domain.User;
+
 import lombok.Builder;
 import lombok.Getter;
 

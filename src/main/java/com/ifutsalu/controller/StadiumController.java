@@ -1,9 +1,11 @@
 package com.ifutsalu.controller;
 
 import com.ifutsalu.domain.Stadium;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +30,6 @@ public class StadiumController {
         stadiums.add(new Stadium("서울스타디움", "서울 마포구 성산동 515-39", "40x20m",
                 false, true, Stadium.ParkingLot.NONE, "근처에 식당이 많아요."));
     }
-
 
     /**
      * 모든 구장 조회
