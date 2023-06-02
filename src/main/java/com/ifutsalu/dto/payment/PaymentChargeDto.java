@@ -1,11 +1,13 @@
 package com.ifutsalu.dto.payment;
 
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Data
+@Builder
+@Getter
 public class PaymentChargeDto {
 
     private BigDecimal amount;

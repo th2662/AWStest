@@ -1,11 +1,14 @@
 package com.ifutsalu.dto.user;
 
 import com.ifutsalu.domain.User;
-import lombok.Data;
+
+import lombok.Builder;
+import lombok.Getter;
 
 import java.time.LocalDate;
 
-@Data
+@Builder
+@Getter
 public class UserUpdateDto {
 
     private String email;

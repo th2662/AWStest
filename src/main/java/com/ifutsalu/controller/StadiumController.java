@@ -1,6 +1,11 @@
 package com.ifutsalu.controller;
 
 import com.ifutsalu.domain.Stadium;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
+@Tag(name = "StadiumController", description = "구장 컨트롤러")
 @RestController
 @RequestMapping("/stadium")
 public class StadiumController {
@@ -25,12 +31,22 @@ public class StadiumController {
                 false, true, Stadium.ParkingLot.NONE, "근처에 식당이 많아요."));
     }
 
+    /**
+     * 모든 구장 조회
+     */
+    @Operation(summary = "모든 구장 조회", description = "모든 구장 정보를 조회합니다", tags = {"StadiumController"})
+    @ApiResponse(responseCode = "200", description = "OK")
     @GetMapping
     public ResponseEntity<?> getAllStadiums() {
 
         return ResponseEntity.ok(stadiums);
     }
 
+    /**
+     * 구장 검색
+     */
+    @Operation(summary = "구장 검색", description = "키워드로 구장을 검색합니다", tags = {"StadiumController"})
+    @ApiResponse(responseCode = "200", description = "OK")
     @GetMapping("/search")
     public ResponseEntity<?> searchStadiums(@RequestParam("keyword") String keyword) {
 

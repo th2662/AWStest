@@ -1,8 +1,10 @@
 package com.ifutsalu.dto.user;
 
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
 
-@Data
+@Builder
+@Getter
 public class UserLoginDto {
 
     private String email;
