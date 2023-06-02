@@ -1,0 +1,27 @@
+server:
+  port: 8080
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+    import: application-test.yml
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+    import: application-local.yml
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+    import: application-dev.yml
+---
+spring:
+  config:
+    activate:
+      on-profile: prd
+    import: application-prd.yml
+

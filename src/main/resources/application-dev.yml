@@ -1,0 +1,23 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+    import: 'aws-parameterstore:'
+  datasource:
+    url: ${jdbc-url}
+    username: ${db-username}
+    password: ${db-password}
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+aws:
+  paramstore:
+    enabled: true
+    prefix: /config
+    profile-separator: _
+    name: ifutsalu
+
+
