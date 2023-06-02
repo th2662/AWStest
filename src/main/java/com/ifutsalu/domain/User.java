@@ -1,12 +1,26 @@
 package com.ifutsalu.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDate;
 
-@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Data
 public class User {
-    @Id
+
+    public enum Gender {
+        MALE, FEMALE
+    }
+
+    public enum Role {
+        ROLE_USER, ROLE_MANAGER, ROLE_ADMIN
+    }
+
     private String email;
     private String password;
     private String name;
@@ -14,17 +28,4 @@ public class User {
     private Gender gender;
     private Role role;
     private LocalDate birth;
-
-    public enum Gender {
-        MAN, WOMAN
-    }
-
-    public enum Role {
-        USER, MANAGER, ADMIN
-    }
-
-
-
-
-
 }
