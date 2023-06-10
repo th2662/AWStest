@@ -1,40 +1,40 @@
-## For Testing & ECR Image Upload
-#name: CI Prebuild
-#
-#on:
-#  push:
-#    branches: [ main, develop ]
-#
-#jobs:
-#  prebuild:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Get app name from repo
-#        run: echo "APP_NAME=$(echo "$GITHUB_REPOSITORY" | awk -F / '{print $2}'
-#
-#      - uses: actions/checkout@v3
-#        with:
-#          fef: ${{ github.ref }}
-#
-#      - uses: actions/setup-java@v3
-#        with:
-#          distribution: 'corretto'
-#          java-version: '11'
-#          cache: 'gradle'
-#
-#      - name: Configure AWS credentials
-#        id: aws-credentials
-#        uses: aws-actions/configure-aws-credentials@v1
-#        with:
-#          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-#          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
-#          aws-region: ${{ secrets.AWS_REGION }}
-#
-#      - name: Grant execute permission for gradlew
-#        run: chmod +x gradlew
-#
-#      - name: Run test
-#        run: ./gradlew test
-#
-#      - name: generate Docker Image
-#        run:
+# For Testing & ECR Image Upload
+name: CI Prebuild
+
+on:
+  push:
+    branches: [ main, develop ]
+
+jobs:
+  prebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get app name from repo
+        run: echo "APP_NAME=$(echo "$GITHUB_REPOSITORY" | awk -F / '{print $2}'
+
+      - uses: actions/checkout@v3
+        with:
+          fef: ${{ github.ref }}
+
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'corretto'
+          java-version: '11'
+          cache: 'gradle'
+
+      - name: Configure AWS credentials
+        id: aws-credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Run test
+        run: ./gradlew test
+
+      - name: generate Docker Image
+        run:
