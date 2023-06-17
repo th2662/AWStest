@@ -1,17 +1,18 @@
 package com.ifutsalu.controller;
 
-import com.ifutsalu.domain.User;
+import com.ifutsalu.domain.user.User;
 import com.ifutsalu.dto.user.UserJoinDto;
 import com.ifutsalu.dto.user.UserLoginDto;
 import com.ifutsalu.dto.user.UserUpdateDto;
-
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.headers.Header;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -19,7 +20,11 @@ import java.time.LocalDate;
 @Tag(name = "UserController", description = "유저 컨트롤러")
 @RestController
 @RequestMapping("/user")
+@RequiredArgsConstructor
 public class UserController {
+
+    // private final UserRepository userRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     /**
      * 로그인
@@ -55,7 +60,7 @@ public class UserController {
     public ResponseEntity<?> join(@RequestBody UserJoinDto userJoinDto) {
         User user = User.builder()
                 .email(userJoinDto.getEmail())
-                .password(userJoinDto.getPassword())
+                .password(bCryptPasswordEncoder.encode(userJoinDto.getPassword()))
                 .name(userJoinDto.getName())
                 .phone(userJoinDto.getPhone())
                 .gender(userJoinDto.getGender())
@@ -63,7 +68,7 @@ public class UserController {
                 .role(User.Role.ROLE_USER)
                 .build();
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(user);
+        return ResponseEntity.status(HttpStatus.CREATED).body("회원가입이 완료되었습니다.");
     }
 
     /**

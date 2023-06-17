@@ -1,6 +1,6 @@
 package com.ifutsalu.controller;
 
-import com.ifutsalu.domain.Payment;
+import com.ifutsalu.domain.payment.Payment;
 import com.ifutsalu.dto.payment.PaymentChargeDto;
 
 import io.swagger.v3.oas.annotations.Operation;

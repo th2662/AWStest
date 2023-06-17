@@ -1,6 +1,6 @@
 package com.ifutsalu.controller;
 
-import com.ifutsalu.domain.Stadium;
+import com.ifutsalu.domain.stadium.Stadium;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
