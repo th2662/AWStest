@@ -1,8 +1,8 @@
 package com.ifutsalu.controller;
 
-import com.ifutsalu.domain.Match;
-import com.ifutsalu.domain.Stadium;
-import com.ifutsalu.domain.User;
+import com.ifutsalu.domain.match.Match;
+import com.ifutsalu.domain.stadium.Stadium;
+import com.ifutsalu.domain.user.User;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

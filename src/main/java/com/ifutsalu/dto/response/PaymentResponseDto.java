@@ -1,15 +1,15 @@
-package com.ifutsalu.dto.payment;
+package com.ifutsalu.dto.response;
 
-import lombok.Builder;
+import com.ifutsalu.domain.user.User;
 import lombok.Getter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Builder
 @Getter
-public class PaymentChargeDto {
+public class PaymentResponseDto {
 
     private BigDecimal amount;
     private LocalDateTime paymentTime;
+    private User user;
 }
