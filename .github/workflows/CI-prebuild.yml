@@ -5,11 +5,6 @@ on:
   push:
     branches: [ main, develop, develop_infrastructure ]
 
-# for github actions secret values.
-permissions:
-  id-token: write
-  contents: read
-
 jobs:
   prebuild:
     runs-on: ubuntu-latest
