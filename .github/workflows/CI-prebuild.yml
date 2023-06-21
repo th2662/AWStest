@@ -33,8 +33,20 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Run test
-        run: ./gradlew test
+      - name: Get Current Time
+        uses: 1466587594/get-current-time@v2
+        id: current-time
+        with:
+          format: YYYY-MM-DDTHH-mm-ss
+          utcOffset: "+09:00"
 
-      - name: generate Docker Image
-        run:
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push image to Amazon ECR
+        run: |
+          docker build -t i-futsal-be:${{steps.current-time.outputs.formattedTime}} .
+          docker i-futsal-be:${{steps.current-time.outputs.formattedTime}} 680988473347.dkr.ecr.ap-southeast-2.amazonaws.com/i-futsal-be${{steps.current-time.outputs.formattedTime}}
+          docker push 680988473347.dkr.ecr.ap-southeast-2.amazonaws.com/i-futsal-be${{steps.current-time.outputs.formattedTime}}
+
