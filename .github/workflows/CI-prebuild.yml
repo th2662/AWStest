@@ -48,6 +48,6 @@ jobs:
       - name: Build, tag, and push image to Amazon ECR
         run: |
           docker build -t i-futsal-be:${{steps.current-time.outputs.formattedTime}} .
-          docker i-futsal-be:${{steps.current-time.outputs.formattedTime}} ${{ secrets.ECR_REPOSITORY }}${{steps.current-time.outputs.formattedTime}}
+          docker tag i-futsal-be:${{steps.current-time.outputs.formattedTime}} ${{ secrets.ECR_REPOSITORY }}${{steps.current-time.outputs.formattedTime}}
           docker push ${{ secrets.ECR_REPOSITORY }}${{steps.current-time.outputs.formattedTime}}
 
