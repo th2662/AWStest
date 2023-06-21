@@ -44,6 +44,7 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
+      # ECR에 업로드합니다.
       - name: Build, tag, and push image to Amazon ECR
         run: |
           docker build -t i-futsal-be:${{steps.current-time.outputs.formattedTime}} .
