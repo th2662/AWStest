@@ -1,0 +1,12 @@
+#
+#name: CD Release STP
+#
+#on:
+#  release:
+#    types: [prereleased]
+#
+#jobs:
+#  dev_deployment:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name:
