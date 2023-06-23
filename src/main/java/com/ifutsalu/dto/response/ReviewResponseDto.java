@@ -9,6 +9,7 @@ public class ReviewResponseDto {
 
     private User user;
     private Match match;
+    private String title;
     private String content;
     private int rating;
 }

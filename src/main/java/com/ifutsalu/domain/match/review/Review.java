@@ -34,6 +34,8 @@ public class Review {
     @JoinColumn(name = "matchId")
     private Match match;
 
+    private String title;
+
     private String content;
 
     private int rating;

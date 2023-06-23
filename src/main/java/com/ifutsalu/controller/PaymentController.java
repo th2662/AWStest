@@ -3,6 +3,7 @@ package com.ifutsalu.controller;
 import com.ifutsalu.domain.payment.Payment;
 import com.ifutsalu.dto.payment.PaymentChargeDto;
 
+import com.ifutsalu.dto.request.PaymentRequestDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -25,7 +26,7 @@ public class PaymentController {
     @Operation(summary = "포인트 충전", description = "포인트를 충전합니다", tags = {"PaymentController"})
     @ApiResponse(responseCode = "200", description = "OK")
     @PostMapping("/charge")
-    public ResponseEntity<?> chargePoints(@RequestBody PaymentChargeDto paymentChargeDto) {
+    public ResponseEntity<?> chargePoints(@RequestBody PaymentRequestDto paymentChargeDto) {
         Payment payment = new Payment(paymentChargeDto.getAmount(), paymentChargeDto.getPaymentTime());
 
         return ResponseEntity.ok(payment);
