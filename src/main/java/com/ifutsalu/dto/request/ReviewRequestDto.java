@@ -1,6 +1,6 @@
 package com.ifutsalu.dto.request;
 
-import com.ifutsalu.domain.match.Match;
+import com.ifutsalu.domain.match.MatchTable;
 import com.ifutsalu.domain.match.review.Review;
 import com.ifutsalu.domain.user.User;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Getter;
 public class ReviewRequestDto {
 
     private User user;
-    private Match match;
+    private MatchTable match;
     private String title;
     private String content;
     private int rating;
@@ -18,6 +18,7 @@ public class ReviewRequestDto {
         return Review.builder()
                 .user(user)
                 .match(match)
+                .title(title)
                 .content(content)
                 .rating(rating)
                 .build();
