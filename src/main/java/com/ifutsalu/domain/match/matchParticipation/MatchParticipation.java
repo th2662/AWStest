@@ -1,6 +1,6 @@
 package com.ifutsalu.domain.match.matchParticipation;
 
-import com.ifutsalu.domain.match.Match;
+import com.ifutsalu.domain.match.MatchTable;
 import com.ifutsalu.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,5 +32,5 @@ public class MatchParticipation {
 
     @ManyToOne
     @JoinColumn(name = "matchId")
-    private Match match;
+    private MatchTable match;
 }

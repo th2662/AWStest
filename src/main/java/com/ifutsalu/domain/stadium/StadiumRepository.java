@@ -9,5 +9,5 @@ import java.util.List;
 public interface StadiumRepository extends JpaRepository<Stadium, Long> {
 
     @Query("SELECT s FROM Stadium s WHERE s.name LIKE %:keyword%")
-    List<Stadium> searchStadiums(@Param(" keyword") String keyword);
+    List<Stadium> searchStadiums(@Param("keyword") String keyword);
 }

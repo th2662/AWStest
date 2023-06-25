@@ -1,3 +1,4 @@
+/*
 package com.ifutsalu.controller;
 
 import com.ifutsalu.domain.payment.Payment;
@@ -20,9 +21,11 @@ import java.util.List;
 @RequestMapping("/payment")
 public class PaymentController {
 
-    /**
+    */
+/**
      * 포인트 충전
-     */
+     *//*
+
     @Operation(summary = "포인트 충전", description = "포인트를 충전합니다", tags = {"PaymentController"})
     @ApiResponse(responseCode = "200", description = "OK")
     @PostMapping("/charge")
@@ -32,9 +35,11 @@ public class PaymentController {
         return ResponseEntity.ok(payment);
     }
 
-    /**
+    */
+/**
      * 결제내역 조회
-     */
+     *//*
+
     @Operation(summary = "결제 내역 조회", description = "사용자의 결제 내역을 조회합니다", tags = {"PaymentController"})
     @ApiResponse(responseCode = "200", description = "OK")
     @GetMapping("/history/{userId}")
@@ -47,9 +52,11 @@ public class PaymentController {
         return ResponseEntity.ok(paymentHistory);
     }
 
-    /**
+    */
+/**
      * 결제 환불
-     */
+     *//*
+
     @Operation(summary = "결제 환불", description = "결제를 환불합니다", tags = {"PaymentController"})
     @ApiResponse(responseCode = "204", description = "No Content")
     @PostMapping("/refund/{paymentId}")
@@ -57,4 +64,4 @@ public class PaymentController {
 
         return ResponseEntity.noContent().build();
     }
-}
+}*/

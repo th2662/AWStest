@@ -1,3 +1,4 @@
+/*
 package com.ifutsalu.controller;
 
 import com.ifutsalu.domain.user.User;
@@ -23,9 +24,11 @@ public class UserController {
     // private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    /**
+    */
+/**
      * 로그인
-     */
+     *//*
+
     @Operation(summary = "회원 로그인", description = "로그인 됩니다", tags = {"UserController"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK",
@@ -44,9 +47,11 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-    /**
+    */
+/**
      * 회원가입
-     */
+     *//*
+
 
     @Operation(summary = "회원 가입", description = "회원 가입을 수행합니다", tags = {"UserController"})
     @ApiResponses(value = {
@@ -68,9 +73,11 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body("회원가입이 완료되었습니다.");
     }
 
-    /**
+    */
+/**
      * 회원 프로필 조회
-     */
+     *//*
+
     @Operation(summary = "회원 프로필 조회", description = "회원 프로필을 조회합니다", tags = {"UserController"})
     @ApiResponse(responseCode = "200", description = "OK")
     @GetMapping("/{id}")
@@ -88,9 +95,11 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-    /**
+    */
+/**
      * 회원정보 수정
-     */
+     *//*
+
     @Operation(summary = "회원 정보 수정", description = "회원 정보를 수정합니다", tags = {"UserController"})
     @ApiResponse(responseCode = "200", description = "OK")
     @PutMapping("/{id}")
@@ -108,9 +117,11 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-    /**
+    */
+/**
      * 회원삭제
-     */
+     *//*
+
     @Operation(summary = "회원 삭제", description = "회원 정보를 삭제합니다", tags = {"UserController"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK",
@@ -124,4 +135,4 @@ public class UserController {
 
         return ResponseEntity.ok().body("삭제 완료");
     }
-}
+}*/

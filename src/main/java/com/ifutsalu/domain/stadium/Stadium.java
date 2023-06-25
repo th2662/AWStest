@@ -1,6 +1,6 @@
 package com.ifutsalu.domain.stadium;
 
-import com.ifutsalu.domain.match.Match;
+import com.ifutsalu.domain.match.MatchTable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,5 +36,5 @@ public class Stadium {
     private String notification;
 
     @OneToMany(mappedBy = "stadium")
-    List<Match> matches;
+    List<MatchTable> matchTables;
 }

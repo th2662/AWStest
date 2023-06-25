@@ -1,6 +1,6 @@
 package com.ifutsalu.dto.response;
 
-import com.ifutsalu.domain.match.Match;
+import com.ifutsalu.domain.match.MatchTable;
 import com.ifutsalu.domain.user.User;
 import lombok.Getter;
 
@@ -8,5 +8,5 @@ import lombok.Getter;
 public class MatchParticipationResponseDto {
 
     private User user;
-    private Match match;
+    private MatchTable matchTable;
 }
