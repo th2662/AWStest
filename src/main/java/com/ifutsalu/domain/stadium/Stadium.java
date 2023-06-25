@@ -1,18 +1,32 @@
 package com.ifutsalu.domain.stadium;
 
 import com.ifutsalu.domain.match.Matching;
-import lombok.AllArgsConstructor;
+import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
 @Entity
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Stadium {
+
+    @Builder
+    public Stadium(String name, String stadiumImageUrl,
+                   String address, String size, boolean showerRoom,
+                   boolean shoesRental, ParkingLot parkingLot, String notification) {
+        this.name = name;
+        this.stadiumImageUrl = stadiumImageUrl;
+        this.address = address;
+        this.size = size;
+        this.showerRoom = showerRoom;
+        this.shoesRental = shoesRental;
+        this.parkingLot = parkingLot;
+        this.notification = notification;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
