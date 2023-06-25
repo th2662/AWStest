@@ -1,7 +1,7 @@
 package com.ifutsalu.service;
 
-import com.ifutsalu.domain.match.MatchRepository;
-import com.ifutsalu.domain.match.MatchTable;
+import com.ifutsalu.domain.match.MatchingRepository;
+import com.ifutsalu.domain.match.Matching;
 import com.ifutsalu.domain.match.review.Review;
 import com.ifutsalu.domain.match.review.ReviewRepository;
 import com.ifutsalu.dto.request.ReviewRequestDto;
@@ -17,11 +17,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class ReviewService {
 
     private final ReviewRepository reviewRepository;
-    private final MatchRepository matchRepository;
+    private final MatchingRepository matchingRepository;
 
     @Transactional
     public void uploadReview(Long matchId, ReviewRequestDto reviewRequestDto) {
-        MatchTable match = matchRepository.findById(matchId)
+        Matching match = matchingRepository.findById(matchId)
                 .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_MATCH));
         Review review = Review.builder()
                 .user(reviewRequestDto.getUser())

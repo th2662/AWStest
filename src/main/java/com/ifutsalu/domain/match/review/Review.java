@@ -1,6 +1,6 @@
 package com.ifutsalu.domain.match.review;
 
-import com.ifutsalu.domain.match.MatchTable;
+import com.ifutsalu.domain.match.Matching;
 import com.ifutsalu.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,7 +34,7 @@ public class Review {
 
     @ManyToOne
     @JoinColumn(name = "matchId")
-    private MatchTable match;
+    private Matching match;
 
     private String title;
 
