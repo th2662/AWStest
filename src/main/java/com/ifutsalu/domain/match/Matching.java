@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Entity
-public class MatchTable {
+public class Matching {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

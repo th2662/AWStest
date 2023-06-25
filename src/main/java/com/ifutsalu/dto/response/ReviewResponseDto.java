@@ -1,6 +1,6 @@
 package com.ifutsalu.dto.response;
 
-import com.ifutsalu.domain.match.MatchTable;
+import com.ifutsalu.domain.match.Matching;
 import com.ifutsalu.domain.match.review.Review;
 import com.ifutsalu.domain.user.User;
 import lombok.Builder;
@@ -12,7 +12,7 @@ public class ReviewResponseDto {
 
     private Long id;
     private User user;
-    private MatchTable match;
+    private Matching match;
     private String title;
     private String content;
     private int rating;
