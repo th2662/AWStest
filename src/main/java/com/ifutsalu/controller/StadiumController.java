@@ -50,7 +50,7 @@ public class StadiumController {
     @ApiResponse(responseCode = "200", description = "OK")
     @GetMapping("/{stadiumId}")
     public ResponseEntity<?> getStadiumDetail(@PathVariable("stadiumId") Long stadiumId) {
-        StadiumResponseDto stadium = stadiumService.getStadiumDetail(stadiumId);
-        return new ResponseEntity<>(new CMRespDto<>(1, "구장 상세정보 조회 성공", stadium), HttpStatus.OK);
+        StadiumResponseDto stadiumResponseDto = stadiumService.getStadiumDetail(stadiumId);
+        return ResponseEntity.ok(stadiumResponseDto);
     }
 }

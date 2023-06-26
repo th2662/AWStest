@@ -47,18 +47,19 @@ public class SchedulerService {
                     .shoesRental(Boolean.TRUE)
                     .parkingLot(ParkingLot.FREE)
                     .notification("설명입니다.")
+                    .latitude(dto.getY())
+                    .longitude(dto.getX())
                     .build();
             stadiumRepository.save(stadium);
         }
     }
 
-    //    @Scheduled(cron = "0 0 12 15 * ?")
     @Scheduled(fixedDelay = 1000000)
     public void scheduleFixedDelayTask() {
         OuterRespDto result =
                 webClientUtil.sendRequest(URL + key + "/json/ListPublicReservationSport/1/10/풋살장");
 
-        // 저장한 Stadium 정보에 매핑해서 넣기..
+        // TODO: 저장한 Stadium 정보에 매핑해서 넣기.
     }
 
 

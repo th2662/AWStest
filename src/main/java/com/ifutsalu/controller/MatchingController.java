@@ -1,32 +1,30 @@
 package com.ifutsalu.controller;
 
 import com.ifutsalu.domain.match.Matching;
-import com.ifutsalu.domain.user.User;
+import com.ifutsalu.dto.response.WeeklyMatchResponseDto;
+import com.ifutsalu.service.MatchDummyService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Tag(name = "MatchController", description = "매치 컨트롤러")
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/match")
 public class MatchingController {
+    private final MatchDummyService matchDummyService;
 
-    private List<Matching> matches;
-    private List<User> users;
-
-    public MatchingController() {
-        users = new ArrayList<>();
-        users.add(new User());
-        users.add(new User());
-
-        matches = new ArrayList<>();
-        matches.add(new Matching());
-        matches.add(new Matching());
+    /**
+     * 오늘 날짜 기준으로 일주일치에 해당하는 매칭 정보 제공
+     */
+    @Operation(summary = "오늘 날짜 기준으로 일주일치 매칭 정보 제공", description = "일주일 분량의 매칭 정보를 제공합니다.", tags = {"MatchController"})
+    @ApiResponse(responseCode = "200", description = "요일 별 매칭 정보를 반환합니다.")
+    @GetMapping("/weekly")
+    public ResponseEntity<WeeklyMatchResponseDto> getWeekMatches() {
+        return ResponseEntity.ok(matchDummyService.mockMatchResponseData());
     }
 
     /**
@@ -37,7 +35,7 @@ public class MatchingController {
     @GetMapping
     public ResponseEntity<?> getAllMatches() {
 
-        return ResponseEntity.ok(matches);
+        return ResponseEntity.ok().build();
     }
 
     /**
@@ -48,7 +46,7 @@ public class MatchingController {
     @GetMapping("/search")
     public ResponseEntity<?> searchMatches(@RequestParam("keyword") String keyword) {
 
-        return ResponseEntity.ok(matches);
+        return ResponseEntity.ok().build();
     }
 
     /**
