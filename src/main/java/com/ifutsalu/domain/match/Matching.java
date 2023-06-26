@@ -15,6 +15,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
 @Builder
 @Entity
 public class Matching {
