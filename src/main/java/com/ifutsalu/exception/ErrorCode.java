@@ -15,9 +15,13 @@ public enum ErrorCode {
 
     // review
     NOT_FOUND_REVIEW(HttpStatus.NOT_FOUND, "해당 리뷰를 찾을 수 없습니다."),
-    
+
     // match
-    NOT_FOUND_MATCH(HttpStatus.NOT_FOUND, "해당 매치를 찾을 수 없습니다.");
+    NOT_FOUND_MATCH(HttpStatus.NOT_FOUND, "해당 매치를 찾을 수 없습니다."),
+
+    // user
+    NOT_FOUND_USER(HttpStatus.NOT_FOUND, "해당 유저를 찾을 수 없습니다."),
+    FORBIDDEN_MEMBER(HttpStatus.FORBIDDEN, "해당 요청에 권한이 없습니다.");
 
     private final HttpStatus status;
     private final String message;

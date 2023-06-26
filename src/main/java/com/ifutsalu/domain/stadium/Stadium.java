@@ -2,6 +2,7 @@ package com.ifutsalu.domain.stadium;
 
 import com.ifutsalu.domain.match.Matching;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Getter
 @Entity
 public class Stadium {
