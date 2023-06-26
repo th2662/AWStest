@@ -64,4 +64,9 @@ public class Matching {
 
     @OneToMany(mappedBy = "match")
     private List<Review> reviews;
+
+    public int getPrice() {
+        return price;
+    }
+
 }

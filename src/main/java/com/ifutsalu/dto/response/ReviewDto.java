@@ -9,8 +9,10 @@ import lombok.Getter;
 public class ReviewDto {
 
     private Long id;
-    private ReviewIdDto user;
-    private ReviewMatchingDto match;
+    private Long userId;
+    private String userEmail;
+    private String userName;
+    private Long matchId;
     private String title;
     private String content;
     private int rating;
@@ -19,8 +21,10 @@ public class ReviewDto {
     public static ReviewDto fromEntity(Review review) {
         return ReviewDto.builder()
                 .id(review.getId())
-                .user(ReviewIdDto.fromUser(review.getUser()))
-                .match(ReviewMatchingDto.fromMatch(review.getMatch()))
+                .userId(review.getUser().getId())
+                .userEmail(review.getUser().getEmail())
+                .userName(review.getUser().getName())
+                .matchId(review.getMatch().getId())
                 .title(review.getTitle())
                 .content(review.getContent())
                 .rating(review.getRating())

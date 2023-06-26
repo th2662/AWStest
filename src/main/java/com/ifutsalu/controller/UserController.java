@@ -1,6 +1,7 @@
 package com.ifutsalu.controller;
 
 import com.ifutsalu.domain.match.Matching;
+import com.ifutsalu.domain.match.matchParticipation.MatchParticipation;
 import com.ifutsalu.domain.match.review.Review;
 import com.ifutsalu.domain.payment.Payment;
 import com.ifutsalu.domain.user.User;
@@ -174,7 +175,7 @@ public class UserController {
                 .build();
 
         Payment payment1 = Payment.builder()
-                .amount(new BigDecimal("100.00"))
+                .amount(new BigDecimal("10000"))
                 .user(user1) // User와 Payment 간의 관계 설정
                 .build();
 
@@ -189,7 +190,7 @@ public class UserController {
                 .build();
 
         Payment payment2 = Payment.builder()
-                .amount(new BigDecimal("50.00"))
+                .amount(new BigDecimal("9000"))
                 .user(user2) // User와 Payment 간의 관계 설정
                 .build();
 
@@ -222,9 +223,17 @@ public class UserController {
 
         List<Payment> payments = user.getPayments();
 
+        List<MatchingParticipationDto> matchingParticipations = new ArrayList<>();
+        for (MatchParticipation participation : user.getMatchParticipations()) {
+            MatchingParticipationDto dto = MatchingParticipationDto.fromMatchingParticipation(participation);
+            matchingParticipations.add(dto);
+        }
+
         UserPaymentResponseDto userPaymentResponseDto = UserPaymentResponseDto.builder()
+                .userId(user.getId())
                 .userName(user.getName())
                 .payments(UserPayment.fromPayments(payments))
+                .matchingParticipations(matchingParticipations)
                 .build();
 
         return ResponseEntity.ok(userPaymentResponseDto);
@@ -237,40 +246,71 @@ public class UserController {
         User user1 = User.builder()
                 .id(1L)
                 .name("John")
-                .profileImageUrl("https://example.com/profiles/john.jpg")
                 .build();
 
         Payment payment1 = Payment.builder()
-                .amount(new BigDecimal("100.00"))
-                .paymentTime(LocalDateTime.now()) // 결제 시간 설정
-                .user(user1) // User와 Payment 간의 관계 설정
+                .id(1L)
+                .paymentTime(LocalDateTime.now())
+                .user(user1)
                 .build();
 
         Payment payment2 = Payment.builder()
-                .amount(new BigDecimal("50.00"))
-                .paymentTime(LocalDateTime.now().minusHours(1)) // 이전 결제 시간 설정
-                .user(user1) // User와 Payment 간의 관계 설정
+                .id(2L)
+                .paymentTime(LocalDateTime.now().minusHours(1))
+                .user(user1)
                 .build();
 
-        user1.setPayments(Arrays.asList(payment1, payment2));
-        users.add(user1);
+        Matching matching1 = Matching.builder()
+                .id(1L)
+                .price(10000)
+                .build();
+
+        Matching matching2 = Matching.builder()
+                .id(2L)
+                .price(5000)
+                .build();
+
+        MatchParticipation matchParticipation1 = MatchParticipation.builder()
+                .user(user1)
+                .match(matching1)
+                .build();
+
+        MatchParticipation matchParticipation2 = MatchParticipation.builder()
+                .user(user1)
+                .match(matching2)
+                .build();
 
         // User 2
         User user2 = User.builder()
                 .id(2L)
-                .name("Alice")
-                .profileImageUrl("https://example.com/profiles/alice.jpg")
+                .name("Jane")
                 .build();
 
         Payment payment3 = Payment.builder()
-                .amount(new BigDecimal("50.00"))
-                .paymentTime(LocalDateTime.now()) // 결제 시간 설정
-                .user(user2) // User와 Payment 간의 관계 설정
+                .id(3L)
+                .paymentTime(LocalDateTime.now().minusHours(2))
+                .user(user2)
                 .build();
 
+        Matching matching3 = Matching.builder()
+                .id(3L)
+                .price(150)
+                .build();
+
+        MatchParticipation matchParticipation3 = MatchParticipation.builder()
+                .user(user2)
+                .match(matching3)
+                .build();
+
+        user1.setPayments(Arrays.asList(payment1, payment2));
+        user1.setMatchParticipations(Arrays.asList(matchParticipation1, matchParticipation2));
         user2.setPayments(Collections.singletonList(payment3));
+        user2.setMatchParticipations(Collections.singletonList(matchParticipation3));
+
+        users.add(user1);
         users.add(user2);
 
         return users;
     }
+
 }

@@ -55,20 +55,6 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Payment> payments;
 
-    public User toEntity(PasswordEncoder passwordEncoder) {
-        return User.builder()
-                .email(email)
-                .profileImageUrl(profileImageUrl)
-                .password(passwordEncoder.encode(password))
-                .name(name)
-                .address(address)
-                .level(level)
-                .phone(phone)
-                .gender(gender)
-                .role(Role.ROLE_USER)
-                .birth(birth)
-                .build();
-    }
 
     public void updateUserInfo(UpdateUserRequestDto userRequestDto) {
         if (userRequestDto.getProfileImageUrl() != null) {
@@ -94,6 +80,10 @@ public class User {
 
     public void setPayments(List<Payment> payments) {
         this.payments = payments;
+    }
+
+    public void setMatchParticipations(List<MatchParticipation> matchParticipations) {
+        this.matchParticipations = matchParticipations;
     }
 
 
