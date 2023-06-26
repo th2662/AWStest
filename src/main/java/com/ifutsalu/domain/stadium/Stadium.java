@@ -17,7 +17,8 @@ public class Stadium {
     @Builder
     public Stadium(String name, String stadiumImageUrl,
                    String address, String size, boolean showerRoom,
-                   boolean shoesRental, ParkingLot parkingLot, String notification) {
+                   boolean shoesRental, ParkingLot parkingLot, String notification,
+                   String latitude, String longitude) {
         this.name = name;
         this.stadiumImageUrl = stadiumImageUrl;
         this.address = address;
@@ -26,6 +27,8 @@ public class Stadium {
         this.shoesRental = shoesRental;
         this.parkingLot = parkingLot;
         this.notification = notification;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     @Id
@@ -51,4 +54,8 @@ public class Stadium {
 
     @OneToMany(mappedBy = "stadium")
     List<Matching> matchings;
+
+    private String latitude;
+
+    private String longitude;
 }

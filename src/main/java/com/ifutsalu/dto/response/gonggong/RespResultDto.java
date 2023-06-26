@@ -7,6 +7,7 @@ import lombok.Getter;
 
 /**
  * 참고 URL : http://data.seoul.go.kr:8080/dataList/OA-2266/A/1/datasetView.do
+ * 공공 데이터 openAPI Response Format
  */
 @Getter
 public class RespResultDto {

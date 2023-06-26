@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.LocalDateTime;
 import lombok.Getter;
 
+/**
+ * 공공 데이터 openAPI Response Format
+ */
 @Getter
 public class ServiceInfoDto {
 
