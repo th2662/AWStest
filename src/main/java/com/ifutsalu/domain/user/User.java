@@ -2,9 +2,12 @@ package com.ifutsalu.domain.user;
 
 import com.ifutsalu.domain.match.matchParticipation.MatchParticipation;
 import com.ifutsalu.domain.payment.Payment;
+import com.ifutsalu.dto.request.UpdateUserRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -13,7 +16,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Getter
 @Entity
+@Table(name = "users")
 public class User {
 
     @Id
@@ -49,4 +54,47 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Payment> payments;
+
+    public User toEntity(PasswordEncoder passwordEncoder) {
+        return User.builder()
+                .email(email)
+                .profileImageUrl(profileImageUrl)
+                .password(passwordEncoder.encode(password))
+                .name(name)
+                .address(address)
+                .level(level)
+                .phone(phone)
+                .gender(gender)
+                .role(Role.ROLE_USER)
+                .birth(birth)
+                .build();
+    }
+
+    public void updateUserInfo(UpdateUserRequestDto userRequestDto) {
+        if (userRequestDto.getProfileImageUrl() != null) {
+            this.profileImageUrl = userRequestDto.getProfileImageUrl();
+        }
+        if (userRequestDto.getPassword() != null) {
+            this.password = userRequestDto.getPassword();
+        }
+        if (userRequestDto.getAddress() != null) {
+            this.address = userRequestDto.getAddress();
+        }
+        if (userRequestDto.getLevel() != null) {
+            this.level = userRequestDto.getLevel();
+        }
+        if (userRequestDto.getPhone() != null) {
+            this.phone = userRequestDto.getPhone();
+        }
+        if (userRequestDto.getRole() != null) {
+            this.role = userRequestDto.getRole();
+        }
+
+    }
+
+    public void setPayments(List<Payment> payments) {
+        this.payments = payments;
+    }
+
+
 }

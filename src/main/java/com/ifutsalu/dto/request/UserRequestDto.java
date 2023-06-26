@@ -5,6 +5,8 @@ import com.ifutsalu.domain.user.Level;
 import com.ifutsalu.domain.user.Role;
 import com.ifutsalu.domain.user.User;
 import lombok.Getter;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 
@@ -22,18 +24,22 @@ public class UserRequestDto {
     private Role role;
     private LocalDate birth;
 
-    public User toEntity() {
+    public User toEntity(PasswordEncoder passwordEncoder) {
         return User.builder()
                 .email(email)
                 .profileImageUrl(profileImageUrl)
-                .password(password)
+                .password(passwordEncoder.encode(password))
                 .name(name)
                 .address(address)
                 .level(level)
                 .phone(phone)
                 .gender(gender)
-                .role(role)
+                .role(Role.ROLE_USER)
                 .birth(birth)
                 .build();
+    }
+
+    public UsernamePasswordAuthenticationToken toAuthentication() {
+        return new UsernamePasswordAuthenticationToken(email, password);
     }
 }
