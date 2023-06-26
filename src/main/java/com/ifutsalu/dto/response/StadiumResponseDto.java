@@ -1,7 +1,5 @@
 package com.ifutsalu.dto.response;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.ifutsalu.domain.match.Matching;
 import com.ifutsalu.domain.stadium.ParkingLot;
 import com.ifutsalu.domain.stadium.Stadium;
 import lombok.Builder;
@@ -23,9 +21,6 @@ public class StadiumResponseDto {
     private ParkingLot parkingLot;
     private String notification;
 
-    @JsonIgnoreProperties({"stadium"})
-    List<Matching> matchings;
-
     public static StadiumResponseDto fromEntity(Stadium stadium) {
         List<String> imgUrls = List.of(stadium.getStadiumImageUrl().split("@@"));
 
@@ -39,7 +34,6 @@ public class StadiumResponseDto {
                 .shoesRental(stadium.isShoesRental())
                 .parkingLot(stadium.getParkingLot())
                 .notification(stadium.getNotification())
-                .matchings(stadium.getMatchings())
                 .build();
     }
 }

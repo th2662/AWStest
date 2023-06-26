@@ -26,7 +26,7 @@ public class MatchResponseDto {
 
 
     // TODO: 추후 적용 예정 (Entity2Dto)
-    public MatchResponseDto fromEntity(Matching matching) {
+    public static MatchResponseDto fromEntity(Matching matching) {
         return null;
     }
 }
