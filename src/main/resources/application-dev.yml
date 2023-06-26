@@ -9,15 +9,16 @@ spring:
     password: ${db-password}
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
     show-sql: true
     database: mysql
     database-platform: org.hibernate.dialect.MySQL8Dialect
+gonggong:
+  key: ${gonggong-key}
 aws:
   paramstore:
     enabled: true
     prefix: /config
     profile-separator: _
     name: ifutsalu
-
 

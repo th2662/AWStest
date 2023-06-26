@@ -1,12 +1,12 @@
 package com.ifutsalu.dto.response;
 
 import com.ifutsalu.domain.match.*;
-import com.ifutsalu.domain.stadium.Stadium;
-import com.ifutsalu.domain.user.User;
+import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 
+@Builder
 @Getter
 public class MatchResponseDto {
 
@@ -15,12 +15,18 @@ public class MatchResponseDto {
     private int minNumber;
     private int maxNumber;
     private int number;
-    private Rule rule;
-    private MatchStatus matchStatus;
-    private LimitLevel limitLevel;
-    private LimitShoes limitShoes;
-    private LimitGender limitGender;
+    private String rule;
+    private String matchStatus;
+    private String limitLevel;
+    private String limitShoes;
+    private String limitGender;
     private int price;
-    private User manager;
-    private Stadium stadium;
+    private String userId;
+    private String stadiumId;
+
+
+    // TODO: 추후 적용 예정 (Entity2Dto)
+    public MatchResponseDto fromEntity(Matching matching) {
+        return null;
+    }
 }
