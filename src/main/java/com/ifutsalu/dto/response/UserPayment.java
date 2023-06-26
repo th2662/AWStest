@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 @Getter
 public class UserPayment {
 
-    private BigDecimal amount;
     private LocalDateTime paymentTime;
 
     public static List<UserPayment> fromPayments(List<Payment> payments) {
@@ -22,7 +21,6 @@ public class UserPayment {
 
     public static UserPayment fromPayment(Payment payment) {
         UserPayment dto = new UserPayment();
-        dto.amount = payment.getAmount();
         dto.paymentTime = payment.getPaymentTime();
         return dto;
     }

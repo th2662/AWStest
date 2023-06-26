@@ -15,6 +15,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
 @Builder
 @Entity
 public class Matching {
@@ -63,4 +64,9 @@ public class Matching {
 
     @OneToMany(mappedBy = "match")
     private List<Review> reviews;
+
+    public int getPrice() {
+        return price;
+    }
+
 }
