@@ -1,42 +1,32 @@
 package com.ifutsalu.controller;
 
-import com.ifutsalu.domain.match.Match;
-import com.ifutsalu.domain.stadium.Stadium;
+import com.ifutsalu.domain.match.Matching;
 import com.ifutsalu.domain.user.User;
-
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Tag(name = "MatchController", description = "매치 컨트롤러")
 @RestController
 @RequestMapping("/match")
-public class MatchController {
+public class MatchingController {
 
-    private List<Match> matches;
+    private List<Matching> matches;
     private List<User> users;
 
-    public MatchController() {
+    public MatchingController() {
         users = new ArrayList<>();
         users.add(new User());
         users.add(new User());
 
         matches = new ArrayList<>();
-        matches.add(new Match(LocalDateTime.of(2023, 5, 10, 16, 00),
-                LocalDateTime.of(2023, 5, 10, 18, 00),
-                10, 15, Match.Rule.FIVE_VS_FIVE_THREE_TEAM, Match.LimitLevel.UNDER_AMATEUR,
-                Match.LimitShoes.ALL, Match.LimitGender.ALL, new Stadium(), 20000, new User(), users));
-
-        matches.add(new Match(LocalDateTime.of(2023, 5, 10, 16, 00),
-                LocalDateTime.of(2023, 5, 10, 18, 00),
-                10, 15, Match.Rule.FIVE_VS_FIVE_THREE_TEAM, Match.LimitLevel.UNDER_AMATEUR,
-                Match.LimitShoes.ALL, Match.LimitGender.ALL, new Stadium(), 20000, new User(), users));
+        matches.add(new Matching());
+        matches.add(new Matching());
     }
 
     /**
@@ -68,11 +58,7 @@ public class MatchController {
     @ApiResponse(responseCode = "200", description = "OK")
     @GetMapping("/{matchId}")
     public ResponseEntity<?> getMatchById(@PathVariable Long matchId) {
-        Match match = new Match(LocalDateTime.of(2023, 5, 10, 16, 00),
-                LocalDateTime.of(2023, 5, 10, 18, 00),
-                10, 15, Match.Rule.FIVE_VS_FIVE_THREE_TEAM, Match.LimitLevel.UNDER_AMATEUR,
-                Match.LimitShoes.ALL, Match.LimitGender.ALL, new Stadium(), 20000, new User(), users);
-
+        Matching match = new Matching();
         return ResponseEntity.ok(match);
     }
 
