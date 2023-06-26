@@ -5,13 +5,15 @@ import com.ifutsalu.domain.stadium.Stadium;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.util.List;
+
 @Getter
 @Builder
 public class StadiumResponseDto {
 
     private Long id;
     private String name;
-    private String stadiumImageUrl;
+    private List<String> stadiumImageUrl;
     private String address;
     private String size;
     private boolean showerRoom;
@@ -20,10 +22,12 @@ public class StadiumResponseDto {
     private String notification;
 
     public static StadiumResponseDto fromEntity(Stadium stadium) {
+        List<String> imgUrls = List.of(stadium.getStadiumImageUrl().split("@@"));
+
         return StadiumResponseDto.builder()
                 .id(stadium.getId())
                 .name(stadium.getName())
-                .stadiumImageUrl(stadium.getStadiumImageUrl())
+                .stadiumImageUrl(imgUrls)
                 .address(stadium.getAddress())
                 .size(stadium.getSize())
                 .showerRoom(stadium.isShowerRoom())

@@ -1,48 +1,32 @@
 package com.ifutsalu.dto.response;
 
 import com.ifutsalu.domain.match.*;
-import com.ifutsalu.domain.stadium.Stadium;
-import com.ifutsalu.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 
-@Getter
 @Builder
+@Getter
 public class MatchResponseDto {
 
-    private Long id;
     private LocalDateTime startTime;
     private LocalDateTime finishTime;
     private int minNumber;
     private int maxNumber;
     private int number;
-    private Rule rule;
-    private MatchStatus matchStatus;
-    private LimitLevel limitLevel;
-    private LimitShoes limitShoes;
-    private LimitGender limitGender;
+    private String rule;
+    private String matchStatus;
+    private String limitLevel;
+    private String limitShoes;
+    private String limitGender;
     private int price;
-    private User manager;
-    private Stadium stadium;
+    private String userId;
+    private String stadiumId;
 
-    public static MatchResponseDto fromEntity(Matching match) {
-        return MatchResponseDto.builder()
-                .id(match.getId())
-                .startTime(match.getStartTime())
-                .finishTime(match.getFinishTime())
-                .minNumber(match.getMinNumber())
-                .maxNumber(match.getMaxNumber())
-                .number(match.getNumber())
-                .rule(match.getRule())
-                .matchStatus(match.getMatchStatus())
-                .limitLevel(match.getLimitLevel())
-                .limitShoes(match.getLimitShoes())
-                .limitGender(match.getLimitGender())
-                .price(match.getPrice())
-                .manager(match.getManager())
-                .stadium(match.getStadium())
-                .build();
+
+    // TODO: 추후 적용 예정 (Entity2Dto)
+    public static MatchResponseDto fromEntity(Matching matching) {
+        return null;
     }
 }

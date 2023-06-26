@@ -1,9 +1,6 @@
 package com.ifutsalu.controller;
 
 import com.ifutsalu.domain.match.*;
-import com.ifutsalu.domain.stadium.Stadium;
-import com.ifutsalu.domain.user.Role;
-import com.ifutsalu.domain.user.User;
 import com.ifutsalu.dto.response.MatchResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -46,20 +43,19 @@ public class MatchingTestController {
     private List<MatchResponseDto> createMockMatches(Long userId) {
         List<MatchResponseDto> mockMatches = new ArrayList<>();
         mockMatches.add(MatchResponseDto.builder()
-                .id(1L)
                 .startTime(LocalDateTime.now())
                 .finishTime(LocalDateTime.now().plusHours(2))
                 .minNumber(6)
                 .maxNumber(12)
                 .number(8)
-                .rule(Rule.FIVE_VS_FIVE_TWO_TEAM)
-                .matchStatus(MatchStatus.OPEN)
-                .limitLevel(LimitLevel.UPPER_AMATEUR)
-                .limitShoes(LimitShoes.ONLY_FUTSAL_SHOES)
-                .limitGender(LimitGender.ALL)
+                .rule(String.valueOf(Rule.FIVE_VS_FIVE_TWO_TEAM))
+                .matchStatus(String.valueOf(MatchStatus.OPEN))
+                .limitLevel(String.valueOf(LimitLevel.UPPER_AMATEUR))
+                .limitShoes(String.valueOf(LimitShoes.ONLY_FUTSAL_SHOES))
+                .limitGender(String.valueOf(LimitGender.ALL))
                 .price(10000)
-                .manager(User.builder().id(1L).name("정성현").role(Role.ROLE_MANAGER).build())
-                .stadium(Stadium.builder().id(1L).name("난지천 풋살장").build())
+                .userId("1")
+                .stadiumId("1")
                 .build());
         return mockMatches;
     }
