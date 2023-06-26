@@ -21,4 +21,6 @@ aws:
     prefix: /config
     profile-separator: _
     name: ifutsalu
+jwt:
+  secret: ${jwt-secret}
 
