@@ -66,6 +66,10 @@ public class Matching {
     @OneToMany(mappedBy = "match")
     private List<Review> reviews;
 
+    public int getPrice() {
+        return price;
+    }
+
     public static Matching toEntity(MatchingRequestDto dto, LocalDateTime startTime,
                                     LocalDateTime finishTime, User user, Stadium stadium) {
         return Matching.builder()

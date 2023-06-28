@@ -10,11 +10,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @SpringBootApplication
 public class IfutsaluApplication {
 
-	@Bean
-	public BCryptPasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
-
 	public static void main(String[] args) {
 		SpringApplication.run(IfutsaluApplication.class, args);
 	}

@@ -4,6 +4,7 @@ import com.ifutsalu.domain.match.Matching;
 import com.ifutsalu.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Getter
 @Entity
 @Table(
         uniqueConstraints = {

@@ -2,6 +2,7 @@ package com.ifutsalu.service;
 
 import com.ifutsalu.domain.match.Matching;
 import com.ifutsalu.domain.match.MatchingRepository;
+import com.ifutsalu.domain.match.matchParticipation.MatchParticipationRepository;
 import com.ifutsalu.domain.stadium.Stadium;
 import com.ifutsalu.domain.stadium.StadiumRepository;
 import com.ifutsalu.domain.user.User;
@@ -11,14 +12,16 @@ import com.ifutsalu.dto.response.MatchResponseDto;
 import com.ifutsalu.util.DateTimeFormatterUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
 public class MatchingService {
+
+    private final MatchParticipationRepository matchParticipationRepository;
 
     private final MatchingRepository matchingRepository;
 
@@ -26,12 +29,7 @@ public class MatchingService {
 
     private final StadiumRepository stadiumRepository;
 
-    public List<MatchResponseDto> getMatchByDate() {
-
-
-        return null;
-    }
-
+    @Transactional(readOnly = true)
     public MatchResponseDto createMatch(MatchingRequestDto matchingRequestDto) {
 
         Optional<User> user = userRepository.findById(Long.parseLong(matchingRequestDto.getUserId()));
@@ -48,5 +46,4 @@ public class MatchingService {
         }
         return MatchResponseDto.builder().build();
     }
-
 }
