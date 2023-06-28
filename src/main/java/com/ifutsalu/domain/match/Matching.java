@@ -4,8 +4,10 @@ import com.ifutsalu.domain.match.matchParticipation.MatchParticipation;
 import com.ifutsalu.domain.match.review.Review;
 import com.ifutsalu.domain.stadium.Stadium;
 import com.ifutsalu.domain.user.User;
+import com.ifutsalu.dto.request.MatchingRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -14,6 +16,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
 @Builder
 @Entity
 public class Matching {
@@ -62,4 +65,23 @@ public class Matching {
 
     @OneToMany(mappedBy = "match")
     private List<Review> reviews;
+
+    public static Matching toEntity(MatchingRequestDto dto, LocalDateTime startTime,
+                                    LocalDateTime finishTime, User user, Stadium stadium) {
+        return Matching.builder()
+                .startTime(startTime)
+                .finishTime(finishTime)
+                .minNumber(Integer.parseInt(dto.getMinNumber()))
+                .maxNumber(Integer.parseInt(dto.getMaxNumber()))
+                .number(dto.getNumber())
+                .rule(Rule.valueOf(dto.getRule()))
+                .matchStatus(MatchStatus.OPEN)
+                .limitLevel(LimitLevel.valueOf(dto.getLimitLevel()))
+                .limitShoes(LimitShoes.valueOf(dto.getLimitShoes()))
+                .limitGender(LimitGender.valueOf(dto.getLimitGender()))
+                .price(Integer.parseInt(dto.getPrice()))
+                .manager(user)
+                .stadium(stadium)
+                .build();
+    }
 }

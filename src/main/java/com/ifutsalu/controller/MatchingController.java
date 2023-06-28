@@ -1,21 +1,35 @@
 package com.ifutsalu.controller;
 
 import com.ifutsalu.domain.match.Matching;
+import com.ifutsalu.dto.request.MatchingRequestDto;
+import com.ifutsalu.dto.response.MatchResponseDto;
+import com.ifutsalu.dto.response.UserResponseDto;
 import com.ifutsalu.dto.response.WeeklyMatchResponseDto;
 import com.ifutsalu.service.MatchDummyService;
+import com.ifutsalu.service.MatchingService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
+@Slf4j
 @Tag(name = "MatchController", description = "매치 컨트롤러")
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/match")
 public class MatchingController {
     private final MatchDummyService matchDummyService;
+
+    private final MatchingService matchingService;
 
     /**
      * 오늘 날짜 기준으로 일주일치에 해당하는 매칭 정보 제공
@@ -26,6 +40,43 @@ public class MatchingController {
     public ResponseEntity<WeeklyMatchResponseDto> getWeekMatches() {
         return ResponseEntity.ok(matchDummyService.mockMatchResponseData());
     }
+
+    /**
+     * 날짜 정보 바탕으로 매칭 정보 제공
+     */
+    @GetMapping("/daily")
+    public ResponseEntity<List<MatchResponseDto>> getDailyMatches(@RequestParam @Valid String year,
+                                                                  @RequestParam @Valid String month,
+                                                                  @RequestParam @Valid String day) {
+        Month monthInfo = Month.of(Integer.parseInt(month));
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate localDate = LocalDate.of(Integer.parseInt(year), monthInfo, Integer.parseInt(day));
+        localDate.format(dtf);
+
+        // TODO: DateTImeException (32일, 13월..) 처리하기
+        // TODO: MissingServletRequestParameterException (@Valid 없는 대상에 대해) 처리
+
+
+        return null;
+    }
+
+
+    /**
+     * 매치 생성하기
+     */
+    @PostMapping()
+    public ResponseEntity<MatchResponseDto> createMatch(@RequestBody @Valid MatchingRequestDto matchingRequestDto) {
+
+        MatchResponseDto result = matchingService.createMatch(matchingRequestDto);
+
+        if ("".equals(result.getUserId())) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(result);
+        }
+    }
+
 
     /**
      * 모든 매치 조회
