@@ -1,7 +1,7 @@
 package com.ifutsalu.service;
 
 import com.ifutsalu.domain.match.Matching;
-import com.ifutsalu.domain.match.MatchingRepository;
+import com.ifutsalu.domain.match.MatchingTestRepository;
 import com.ifutsalu.domain.match.matchParticipation.MatchParticipationRepository;
 import com.ifutsalu.domain.user.Role;
 import com.ifutsalu.domain.user.User;
@@ -19,11 +19,11 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
-public class MatchingService {
+public class MatchingTestService {
 
     private final MatchParticipationRepository matchParticipationRepository;
     private final UserRepository userRepository;
-    private final MatchingRepository matchingRepository;
+    private final MatchingTestRepository matchingTestRepository;
 
     @Transactional(readOnly = true)
     public List<MatchResponseDto> getMatchesByUserId(Long userId) {
@@ -43,7 +43,7 @@ public class MatchingService {
             throw new CustomException(ErrorCode.FORBIDDEN_MEMBER);
         }
 
-        List<Matching> matches = matchingRepository.findByManager(user);
+        List<Matching> matches = matchingTestRepository.findByManager(user);
         return matches.stream()
                 .map(MatchResponseDto::fromEntity)
                 .collect(Collectors.toList());

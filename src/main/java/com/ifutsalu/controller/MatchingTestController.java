@@ -2,6 +2,7 @@ package com.ifutsalu.controller;
 
 import com.ifutsalu.domain.match.*;
 import com.ifutsalu.dto.response.MatchResponseDto;
+import com.ifutsalu.service.MatchingTestService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -22,14 +23,14 @@ import java.util.List;
 @RequestMapping("/matchTest")
 public class MatchingTestController {
 
-    // private final MatchingService matchingService;
+    private final MatchingTestService matchingTestService;
 
     @Operation(summary = "예약 매칭 목록 조회", description = "특정 유저가 예약한 매칭 목록을 조회합니다", tags = {"MatchingTestController"})
     @ApiResponse(responseCode = "200", description = "OK")
     @GetMapping("/user/{userId}")
     public ResponseEntity<?> getMatchesByUserId(@PathVariable("userId") Long userId) {
-        // List<MatchResponseDto> matchResponseDtos = matchingService.getMatchesByUserId(userId);
-        List<MatchResponseDto> matchResponseDtos = createMockMatches(userId);
+        List<MatchResponseDto> matchResponseDtos = matchingTestService.getMatchesByUserId(userId);
+        // List<MatchResponseDto> matchResponseDtos = createMockMatches(userId);
         return ResponseEntity.ok(matchResponseDtos);
     }
 
@@ -37,8 +38,8 @@ public class MatchingTestController {
     @ApiResponse(responseCode = "200", description = "OK")
     @GetMapping("/manager/{userId}")
     public ResponseEntity<?> getMatchesByManager(@PathVariable("userId") Long userId) {
-        // List<MatchResponseDto> matchResponseDtos = matchingService.getMatchesByManager(userId);
-        List<MatchResponseDto> matchResponseDtos = createMockMatches(userId);
+        List<MatchResponseDto> matchResponseDtos = matchingTestService.getMatchesByManager(userId);
+        // List<MatchResponseDto> matchResponseDtos = createMockMatches(userId);
         return ResponseEntity.ok(matchResponseDtos);
     }
 
