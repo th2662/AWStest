@@ -4,6 +4,7 @@ import com.ifutsalu.domain.user.Gender;
 import com.ifutsalu.domain.user.Level;
 import com.ifutsalu.domain.user.Role;
 import com.ifutsalu.domain.user.User;
+import lombok.Builder;
 import lombok.Getter;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -11,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.time.LocalDate;
 
 @Getter
+@Builder
 public class UserRequestDto {
 
     private String email;

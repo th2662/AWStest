@@ -5,7 +5,7 @@ import com.ifutsalu.domain.match.matchParticipation.MatchParticipation;
 import com.ifutsalu.domain.match.review.Review;
 import com.ifutsalu.domain.payment.Payment;
 import com.ifutsalu.domain.user.User;
-import com.ifutsalu.dto.request.UpdateUserRequestDto;
+import com.ifutsalu.dto.request.UserUpdateRequest;
 import com.ifutsalu.dto.response.*;
 import com.ifutsalu.service.UserService;
 import com.ifutsalu.util.SecurityUtil;
@@ -14,6 +14,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -49,12 +50,23 @@ public class UserController {
     @Operation(summary = "회원 프로필 수정", description = "회원 프로필을 수정합니다", tags = {"UserController"})
     @ApiResponse(responseCode = "200", description = "OK")
     @PutMapping("/me")
-    public ResponseEntity<UserResponseDto> updateUserInfo(@RequestBody UpdateUserRequestDto updateUserRequestDto) {
+    public ResponseEntity<UserUpdateResponse> updateUserInfo(@RequestBody UserUpdateRequest updateUserRequestDto) {
         Long userId = SecurityUtil.getCurrentUserId();
-        UserResponseDto updatedUser = userService.updateUserInfo(userId, updateUserRequestDto);
+        UserUpdateResponse updatedUser = userService.updateUserInfo(userId, updateUserRequestDto);
         return ResponseEntity.ok(updatedUser);
     }
 
+    /**
+     * 회원 권한 매니저로 변경하기
+     */
+    @Operation(summary = "회원 권한 매니저로 수정", description = "회원 권한을 매니저로 수정합니다", tags = {"UserController"})
+    @ApiResponse(responseCode = "200", description = "OK")
+//    @PreAuthorize("hasRole('ADMIN')")
+    @PatchMapping("/update/{userId}")
+    public ResponseEntity<?> updateUserRole(@PathVariable Long userId) {
+        userService.updateUserRole(userId);
+        return ResponseEntity.ok().build();
+    }
 
     /**
      * 유저가 작성한 리뷰 리스트 조회 API

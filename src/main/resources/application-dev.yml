@@ -1,18 +1,38 @@
 spring:
+  h2:
+    console:
+      enabled: true  # H2 Console을 사용할지 여부 (H2 Console은 H2 Database를 UI로 제공해주는 기능)
+      path: /h2-console  # H2 Console의 Path
+  datasource:
+    url: jdbc:h2:~/test  # H2 데이터베이스 URL
+    driver-class-name: org.h2.Driver  # H2 드라이버 클래스
+    username: sa  # H2 기본 사용자명
+    password: 1234 # H2 기본 암호
   config:
     activate:
       on-profile: dev
     import: 'aws-parameterstore:'
-  datasource:
-    url: ${jdbc-url}
-    username: ${db-username}
-    password: ${db-password}
+
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
     show-sql: true
-    database: mysql
-    database-platform: org.hibernate.dialect.MySQL8Dialect
+    database-platform: org.hibernate.dialect.H2Dialect  # H2 데이터베이스 플랫폼 설정
+#spring:
+#  config:
+#    activate:
+#      on-profile: dev
+#    import: 'aws-parameterstore:'
+#  datasource:
+#    url: ${jdbc-url}
+#    username: ${db-username}
+#    password: ${db-password}
+#  jpa:
+#    hibernate:
+#      ddl-auto: none
+#    show-sql: true
+#    database: mysql
+#    database-platform: org.hibernate.dialect.MySQL8Dialect
 gonggong:
   key: ${gonggong-key}
 aws:

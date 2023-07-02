@@ -2,12 +2,11 @@ package com.ifutsalu.domain.user;
 
 import com.ifutsalu.domain.match.matchParticipation.MatchParticipation;
 import com.ifutsalu.domain.payment.Payment;
-import com.ifutsalu.dto.request.UpdateUserRequestDto;
+import com.ifutsalu.dto.request.UserUpdateRequest;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -56,27 +55,26 @@ public class User {
     private List<Payment> payments;
 
 
-    public void updateUserInfo(UpdateUserRequestDto userRequestDto) {
-        if (userRequestDto.getProfileImageUrl() != null) {
-            this.profileImageUrl = userRequestDto.getProfileImageUrl();
+    public void updateUserInfo(UserUpdateRequest userUpdateRequest) {
+        if (userUpdateRequest.getProfileImageUrl() != null) {
+            this.profileImageUrl = userUpdateRequest.getProfileImageUrl();
         }
-        if (userRequestDto.getPassword() != null) {
-            this.password = userRequestDto.getPassword();
+        if (userUpdateRequest.getAddress() != null) {
+            this.address = userUpdateRequest.getAddress();
         }
-        if (userRequestDto.getAddress() != null) {
-            this.address = userRequestDto.getAddress();
+        if (userUpdateRequest.getLevel() != null) {
+            this.level = userUpdateRequest.getLevel();
         }
-        if (userRequestDto.getLevel() != null) {
-            this.level = userRequestDto.getLevel();
+        if (userUpdateRequest.getPhone() != null) {
+            this.phone = userUpdateRequest.getPhone();
         }
-        if (userRequestDto.getPhone() != null) {
-            this.phone = userRequestDto.getPhone();
-        }
-        if (userRequestDto.getRole() != null) {
-            this.role = userRequestDto.getRole();
-        }
-
     }
+
+    public void changeRole(Role role) {
+        this.role = role;
+    }
+
+
 
     public void setPayments(List<Payment> payments) {
         this.payments = payments;

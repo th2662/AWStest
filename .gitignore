@@ -13,6 +13,10 @@
 **/build/
 !src/**/build/
 
+# Ignore test folder
+/test
+
+
 # Ignore Gradle GUI config
 gradle-app.setting
 

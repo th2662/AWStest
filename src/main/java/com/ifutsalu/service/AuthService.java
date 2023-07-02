@@ -8,6 +8,8 @@ import com.ifutsalu.dto.request.TokenRequestDto;
 import com.ifutsalu.dto.request.UserRequestDto;
 import com.ifutsalu.dto.response.TokenResponseDto;
 import com.ifutsalu.jwt.TokenProvider;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class AuthService {
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
@@ -25,8 +28,7 @@ public class AuthService {
     private final TokenProvider tokenProvider;
     private final RefreshTokenRepository refreshTokenRepository;
 
-    @Transactional
-    public void signup(UserRequestDto userRequestDto) {
+    public void join(UserRequestDto userRequestDto) {
         if (userRepository.existsByEmail(userRequestDto.getEmail())) {
             throw new RuntimeException("이미 가입되어 있는 유저입니다");
             //프론트한테 response로 보내주기
@@ -60,7 +62,6 @@ public class AuthService {
         return tokenResponseDto;
     }
 
-    @Transactional
     public TokenResponseDto reissue(TokenRequestDto tokenRequestDto) {
         // 1. Refresh Token 검증
         if (!tokenProvider.validateToken(tokenRequestDto.getRefreshToken())) {
