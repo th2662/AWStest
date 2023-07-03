@@ -11,5 +11,4 @@ public class IfutsaluApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(IfutsaluApplication.class, args);
 	}
-
 }

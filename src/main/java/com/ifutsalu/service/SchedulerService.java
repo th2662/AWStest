@@ -6,7 +6,7 @@ import com.ifutsalu.domain.stadium.Stadium;
 import com.ifutsalu.domain.stadium.StadiumRepository;
 import com.ifutsalu.dto.response.gonggong.StadiumInfoDto;
 import com.ifutsalu.dto.response.gonggong.StadiumJsonDto;
-import com.ifutsalu.util.WebClientUtil;
+
 import java.io.FileReader;
 import java.io.IOException;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,6 @@ public class SchedulerService {
     @Value("${gonggong.key}")
     private String key; // static으로 선언하는 순간 가져올 수 없게 됨.
     private final String URL = "http://openAPI.seoul.go.kr:8088/";
-    WebClientUtil webClientUtil;
 
     /**
      * for initialize Stadium Entity Data. Only load once.
