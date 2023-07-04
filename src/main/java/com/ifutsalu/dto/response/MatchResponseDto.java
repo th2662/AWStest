@@ -24,9 +24,21 @@ public class MatchResponseDto {
     private String userId;
     private String stadiumId;
 
-
-    // TODO: 추후 적용 예정 (Entity2Dto)
     public static MatchResponseDto fromEntity(Matching matching) {
-        return null;
+        return MatchResponseDto.builder()
+                .startTime(matching.getStartTime())
+                .finishTime(matching.getFinishTime())
+                .minNumber(matching.getMinNumber())
+                .maxNumber(matching.getMaxNumber())
+                .number(matching.getNumber())
+                .rule(matching.getRule().name())
+                .matchStatus(matching.getMatchStatus().name())
+                .limitLevel(matching.getLimitLevel().name())
+                .limitShoes(matching.getLimitShoes().name())
+                .limitGender(matching.getLimitGender().name())
+                .price(matching.getPrice())
+                .userId(matching.getManager().getId().toString())
+                .stadiumId(matching.getStadium().getId().toString())
+                .build();
     }
 }

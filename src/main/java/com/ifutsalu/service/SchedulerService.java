@@ -4,16 +4,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ifutsalu.domain.stadium.ParkingLot;
 import com.ifutsalu.domain.stadium.Stadium;
 import com.ifutsalu.domain.stadium.StadiumRepository;
-import com.ifutsalu.dto.response.gonggong.OuterRespDto;
 import com.ifutsalu.dto.response.gonggong.StadiumInfoDto;
 import com.ifutsalu.dto.response.gonggong.StadiumJsonDto;
-import com.ifutsalu.util.WebClientUtil;
+
 import java.io.FileReader;
 import java.io.IOException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -25,7 +23,6 @@ public class SchedulerService {
     @Value("${gonggong.key}")
     private String key; // static으로 선언하는 순간 가져올 수 없게 됨.
     private final String URL = "http://openAPI.seoul.go.kr:8088/";
-    WebClientUtil webClientUtil;
 
     /**
      * for initialize Stadium Entity Data. Only load once.
@@ -53,14 +50,4 @@ public class SchedulerService {
             stadiumRepository.save(stadium);
         }
     }
-
-    @Scheduled(fixedDelay = 1000000)
-    public void scheduleFixedDelayTask() {
-        OuterRespDto result =
-                webClientUtil.sendRequest(URL + key + "/json/ListPublicReservationSport/1/10/풋살장");
-
-        // TODO: 저장한 Stadium 정보에 매핑해서 넣기.
-    }
-
-
 }
