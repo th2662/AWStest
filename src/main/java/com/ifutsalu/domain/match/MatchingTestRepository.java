@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface MatchingRepository extends JpaRepository<Matching, Long> {
+public interface MatchingTestRepository extends JpaRepository<Matching, Long> {
 
     List<Matching> findByManager(User manager);
 
