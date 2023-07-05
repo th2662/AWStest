@@ -14,7 +14,7 @@
 !src/**/build/
 
 # Ignore test folder
-/test
+/test/**
 
 
 # Ignore Gradle GUI config

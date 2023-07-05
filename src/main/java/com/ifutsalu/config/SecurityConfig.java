@@ -64,6 +64,7 @@ public class SecurityConfig {
                 .antMatchers("/review/**").permitAll() //테스트 때문에 일단 켜둠
                 .antMatchers("/stadium/**").permitAll() //테스트 때문에 일단 켜둠
                 .antMatchers("/matchTest/**").permitAll()
+                .antMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-resources/**").permitAll() // 스웨거 허용
                 .anyRequest().authenticated()   // 나머지 API 는 전부 인증 필요
 
                 // JwtFilter 를 addFilterBefore 로 등록했던 JwtSecurityConfig 클래스를 적용

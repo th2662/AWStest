@@ -2,7 +2,7 @@ package com.ifutsalu.domain.user;
 
 import com.ifutsalu.domain.match.matchParticipation.MatchParticipation;
 import com.ifutsalu.domain.payment.Payment;
-import com.ifutsalu.dto.request.UserUpdateRequest;
+import com.ifutsalu.dto.request.UserUpdateRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -55,18 +55,18 @@ public class User {
     private List<Payment> payments;
 
 
-    public void updateUserInfo(UserUpdateRequest userUpdateRequest) {
-        if (userUpdateRequest.getProfileImageUrl() != null) {
-            this.profileImageUrl = userUpdateRequest.getProfileImageUrl();
+    public void updateUserInfo(UserUpdateRequestDto userUpdateRequestDto) {
+        if (userUpdateRequestDto.getProfileImageUrl() != null) {
+            this.profileImageUrl = userUpdateRequestDto.getProfileImageUrl();
         }
-        if (userUpdateRequest.getAddress() != null) {
-            this.address = userUpdateRequest.getAddress();
+        if (userUpdateRequestDto.getAddress() != null) {
+            this.address = userUpdateRequestDto.getAddress();
         }
-        if (userUpdateRequest.getLevel() != null) {
-            this.level = userUpdateRequest.getLevel();
+        if (userUpdateRequestDto.getLevel() != null) {
+            this.level = userUpdateRequestDto.getLevel();
         }
-        if (userUpdateRequest.getPhone() != null) {
-            this.phone = userUpdateRequest.getPhone();
+        if (userUpdateRequestDto.getPhone() != null) {
+            this.phone = userUpdateRequestDto.getPhone();
         }
     }
 

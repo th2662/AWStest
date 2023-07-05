@@ -5,7 +5,8 @@ import com.ifutsalu.domain.match.matchParticipation.MatchParticipation;
 import com.ifutsalu.domain.match.review.Review;
 import com.ifutsalu.domain.payment.Payment;
 import com.ifutsalu.domain.user.User;
-import com.ifutsalu.dto.request.UserUpdateRequest;
+import com.ifutsalu.domain.user.UserRepository;
+import com.ifutsalu.dto.request.UserUpdateRequestDto;
 import com.ifutsalu.dto.response.*;
 import com.ifutsalu.service.UserService;
 import com.ifutsalu.util.SecurityUtil;
@@ -14,15 +15,12 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.Option;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -50,7 +48,7 @@ public class UserController {
     @Operation(summary = "회원 프로필 수정", description = "회원 프로필을 수정합니다", tags = {"UserController"})
     @ApiResponse(responseCode = "200", description = "OK")
     @PutMapping("/me")
-    public ResponseEntity<UserUpdateResponse> updateUserInfo(@RequestBody UserUpdateRequest updateUserRequestDto) {
+    public ResponseEntity<UserUpdateResponse> updateUserInfo(@RequestBody UserUpdateRequestDto updateUserRequestDto) {
         Long userId = SecurityUtil.getCurrentUserId();
         UserUpdateResponse updatedUser = userService.updateUserInfo(userId, updateUserRequestDto);
         return ResponseEntity.ok(updatedUser);
@@ -64,6 +62,7 @@ public class UserController {
 //    @PreAuthorize("hasRole('ADMIN')")
     @PatchMapping("/update/{userId}")
     public ResponseEntity<?> updateUserRole(@PathVariable Long userId) {
+
         userService.updateUserRole(userId);
         return ResponseEntity.ok().build();
     }

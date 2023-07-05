@@ -15,12 +15,12 @@ public class UserUpdateResponse {
     private Level level;
     private String phone;
 
-    public static UserUpdateResponse of(Optional<User> user) {
+    public static UserUpdateResponse of(User user) {
         UserUpdateResponse dto = new UserUpdateResponse();
-        dto.profileImageUrl = user.get().getProfileImageUrl();
-        dto.address = user.get().getAddress();
-        dto.level = user.get().getLevel();
-        dto.phone = user.get().getPhone();
+        dto.profileImageUrl = user.getProfileImageUrl();
+        dto.address = user.getAddress();
+        dto.level = user.getLevel();
+        dto.phone = user.getPhone();
         return dto;
     }
 }

@@ -3,7 +3,7 @@ package com.ifutsalu.service;
 import com.ifutsalu.domain.user.Role;
 import com.ifutsalu.domain.user.User;
 import com.ifutsalu.domain.user.UserRepository;
-import com.ifutsalu.dto.request.UserUpdateRequest;
+import com.ifutsalu.dto.request.UserUpdateRequestDto;
 import com.ifutsalu.dto.response.UserResponseDto;
 import com.ifutsalu.dto.response.UserUpdateResponse;
 import com.ifutsalu.exception.AlreadyManagerRoleException;
@@ -26,7 +26,7 @@ public class UserService {
     }
 
     @Transactional
-    public UserUpdateResponse updateUserInfo(Long userId, UserUpdateRequest updateUserRequestDto) {
+    public UserUpdateResponse updateUserInfo(Long userId, UserUpdateRequestDto updateUserRequestDto) {
         Optional<User> user = userRepository.findById(userId);
         if(user.isEmpty()) {
             throw new RuntimeException("로그인 유저 정보가 없습니다");
@@ -36,7 +36,7 @@ public class UserService {
 
         userRepository.save(user.get());
 
-        return UserUpdateResponse.of(user);
+        return UserUpdateResponse.of(user.get());
     }
 
 

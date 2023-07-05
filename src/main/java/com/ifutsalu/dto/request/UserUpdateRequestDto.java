@@ -1,12 +1,10 @@
 package com.ifutsalu.dto.request;
 
 import com.ifutsalu.domain.user.Level;
-import com.ifutsalu.domain.user.User;
-import com.ifutsalu.dto.response.UserResponseDto;
 import lombok.Getter;
 
 @Getter
-public class UserUpdateRequest {
+public class UserUpdateRequestDto {
 
     private String profileImageUrl;
     private String address;
