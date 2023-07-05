@@ -63,6 +63,9 @@ public class SecurityConfig {
                 .antMatchers("/match/**").permitAll() //테스트 때문에 일단 켜둠
                 .antMatchers("/review/**").permitAll() //테스트 때문에 일단 켜둠
                 .antMatchers("/stadium/**").permitAll() //테스트 때문에 일단 켜둠
+                .antMatchers("/v3/api-docs").permitAll()
+                .antMatchers("/swagger-ui/**").permitAll()
+                .antMatchers("/swagger-resources/**").permitAll()
                 .antMatchers("/matchTest/**").permitAll()
                 .antMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-resources/**").permitAll() // 스웨거 허용
                 .anyRequest().authenticated()   // 나머지 API 는 전부 인증 필요
