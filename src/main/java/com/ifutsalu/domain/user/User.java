@@ -2,7 +2,7 @@ package com.ifutsalu.domain.user;
 
 import com.ifutsalu.domain.match.matchParticipation.MatchParticipation;
 import com.ifutsalu.domain.payment.Payment;
-import com.ifutsalu.dto.request.UpdateUserRequestDto;
+import com.ifutsalu.dto.request.UserUpdateRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -55,27 +55,26 @@ public class User {
     private List<Payment> payments;
 
 
-    public void updateUserInfo(UpdateUserRequestDto userRequestDto) {
-        if (userRequestDto.getProfileImageUrl() != null) {
-            this.profileImageUrl = userRequestDto.getProfileImageUrl();
+    public void updateUserInfo(UserUpdateRequestDto userUpdateRequestDto) {
+        if (userUpdateRequestDto.getProfileImageUrl() != null) {
+            this.profileImageUrl = userUpdateRequestDto.getProfileImageUrl();
         }
-        if (userRequestDto.getPassword() != null) {
-            this.password = userRequestDto.getPassword();
+        if (userUpdateRequestDto.getAddress() != null) {
+            this.address = userUpdateRequestDto.getAddress();
         }
-        if (userRequestDto.getAddress() != null) {
-            this.address = userRequestDto.getAddress();
+        if (userUpdateRequestDto.getLevel() != null) {
+            this.level = userUpdateRequestDto.getLevel();
         }
-        if (userRequestDto.getLevel() != null) {
-            this.level = userRequestDto.getLevel();
+        if (userUpdateRequestDto.getPhone() != null) {
+            this.phone = userUpdateRequestDto.getPhone();
         }
-        if (userRequestDto.getPhone() != null) {
-            this.phone = userRequestDto.getPhone();
-        }
-        if (userRequestDto.getRole() != null) {
-            this.role = userRequestDto.getRole();
-        }
-
     }
+
+    public void changeRole(Role role) {
+        this.role = role;
+    }
+
+
 
     public void setPayments(List<Payment> payments) {
         this.payments = payments;

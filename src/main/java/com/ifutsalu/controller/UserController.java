@@ -5,11 +5,12 @@ import com.ifutsalu.domain.match.matchParticipation.MatchParticipation;
 import com.ifutsalu.domain.match.review.Review;
 import com.ifutsalu.domain.payment.Payment;
 import com.ifutsalu.domain.user.User;
-import com.ifutsalu.dto.request.UpdateUserRequestDto;
+import com.ifutsalu.dto.request.UserUpdateRequestDto;
 import com.ifutsalu.dto.response.*;
 import com.ifutsalu.service.UserService;
 import com.ifutsalu.util.SecurityUtil;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -18,10 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -49,12 +47,24 @@ public class UserController {
     @Operation(summary = "회원 프로필 수정", description = "회원 프로필을 수정합니다", tags = {"UserController"})
     @ApiResponse(responseCode = "200", description = "OK")
     @PutMapping("/me")
-    public ResponseEntity<UserResponseDto> updateUserInfo(@RequestBody UpdateUserRequestDto updateUserRequestDto) {
+    public ResponseEntity<UserUpdateResponse> updateUserInfo(@RequestBody UserUpdateRequestDto updateUserRequestDto) {
         Long userId = SecurityUtil.getCurrentUserId();
-        UserResponseDto updatedUser = userService.updateUserInfo(userId, updateUserRequestDto);
+        UserUpdateResponse updatedUser = userService.updateUserInfo(userId, updateUserRequestDto);
         return ResponseEntity.ok(updatedUser);
     }
 
+    /**
+     * 회원 권한 매니저로 변경하기
+     */
+    @Operation(summary = "회원 권한 매니저로 수정", description = "회원 권한을 매니저로 수정합니다", tags = {"UserController"})
+    @ApiResponse(responseCode = "200", description = "OK")
+//    @PreAuthorize("hasRole('ADMIN')")
+    @PatchMapping("/update/{userId}")
+    public ResponseEntity<?> updateUserRole(@PathVariable Long userId) {
+
+        userService.updateUserRole(userId);
+        return ResponseEntity.ok().build();
+    }
 
     /**
      * 유저가 작성한 리뷰 리스트 조회 API
@@ -63,7 +73,7 @@ public class UserController {
     @Operation(summary = "특정 유저 리뷰 리스트 조회", description = "특정 유저가 사용한 작성한 리뷰 리스트를를 조회합니다", tags = {"UserController"})
     @ApiResponse(responseCode = "200", description = "OK")
     @ApiResponse(responseCode = "404", description = "Not Found")
-    public ResponseEntity<List<ReviewDto>> getReviewByUser(@PathVariable Long userId) {
+    public ResponseEntity<List<ReviewDto>> getReviewByUser(@Parameter(description = "유저 ID", example = "1") @PathVariable Long userId) {
         // 목데이터 생성
         List<Review> reviews = createMockReviews(userId);
 
@@ -144,7 +154,7 @@ public class UserController {
     @Operation(summary = "특정 유저의 프로필 조회", description = "특정 유저의 프로필 이미지와 잔액을 조회함", tags = {"UserController"})
     @ApiResponse(responseCode = "200", description = "OK")
     @ApiResponse(responseCode = "404", description = "Not Found")
-    public ResponseEntity<UserProfileResponse> getUserProfile(@PathVariable Long userId) {
+    public ResponseEntity<UserProfileResponse> getUserProfile(@Parameter(description = "유저 ID (예: 1 또는 2)") @PathVariable Long userId) {
         // 목데이터 생성
         List<User> users = createMockUsers();
 
@@ -207,7 +217,7 @@ public class UserController {
     @Operation(summary = "특정 유저의 결제 내역 조회", description = "특정 유저의 결제내역을 조회합니다", tags = {"UserController"})
     @ApiResponse(responseCode = "200", description = "OK")
     @ApiResponse(responseCode = "404", description = "Not Found")
-    public ResponseEntity<UserPaymentResponseDto> getUserPayments(@PathVariable Long userId) {
+    public ResponseEntity<UserPaymentResponseDto> getUserPayments(@Parameter(description = "유저 ID (예: 1 또는 2)") @PathVariable Long userId) {
         // Mock 데이터 생성
         List<User> users = createPaymentUsers();
 

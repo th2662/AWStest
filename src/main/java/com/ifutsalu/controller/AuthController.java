@@ -37,9 +37,9 @@ public class AuthController {
                     }),
             @ApiResponse(responseCode = "400", description = "BAD REQUEST")
     })
-    @PostMapping("/signup")
+    @PostMapping("/join")
     public ResponseEntity<?> signup(@RequestBody UserRequestDto userRequestDto) {
-        authService.signup(userRequestDto);
+        authService.join(userRequestDto);
         return ResponseEntity.ok("회원가입에 성공했습니다");
     }
 
